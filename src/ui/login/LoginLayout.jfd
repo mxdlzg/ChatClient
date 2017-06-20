@@ -1,0 +1,157 @@
+JFDML JFormDesigner: "6.0.1.0.112" Java: "1.8.0_66" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+			name: "this"
+			"minimumSize": new java.awt.Dimension( 400, 500 )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+				"axis": 1
+			} ) {
+				name: "mainPanel"
+				"minimumSize": new java.awt.Dimension( 400, 500 )
+				add( new FormContainer( "javax.swing.JLayeredPane", new FormLayoutManager( class javax.swing.JLayeredPane ) ) {
+					name: "layeredPane"
+					"minimumSize": new java.awt.Dimension( 400, 300 )
+					"maximumSize": new java.awt.Dimension( 400, 150 )
+					add( new FormComponent( "ui.custom.PictureLabel" ) {
+						name: "registerPC"
+						"text": "text"
+						"height": 150
+						"width": 500
+						"imageIcon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"url": "resources/registerPC.jpg"
+						"background": new java.awt.Color( 255, 255, 255, 255 )
+					}, new FormLayoutConstraints( null ) {
+						"x": 0
+						"y": 0
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btnFormClose"
+						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\Window\\window_close_normal_white.png" )
+						"margin": new java.awt.Insets( 0, 0, 0, 0 )
+						"focusPainted": false
+						"borderPainted": false
+						"selectedIcon": new com.jformdesigner.model.SwingIcon( 1, "E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\Window\\window_close_hover.png" )
+						"pressedIcon": new com.jformdesigner.model.SwingIcon( 1, "E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\Window\\window_close_down.png" )
+						"rolloverEnabled": false
+						"requestFocusEnabled": false
+						"rolloverIcon": new com.jformdesigner.model.SwingIcon( 1, "E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\Window\\window_close_hover.png" )
+						"opaque": false
+						"contentAreaFilled": false
+					}, new FormLayoutConstraints( null ) {
+						"x": 350
+						"y": -10
+						"width": 50
+						"height": 50
+						"layer": 300
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) ) {
+					name: "infoPanel"
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+						name: "infoBuildPanel"
+						"maximumSize": new java.awt.Dimension( 400, 350 )
+						"background": new java.awt.Color( 255, 255, 255, 255 )
+						"minimumSize": new java.awt.Dimension( 400, 350 )
+						"preferredSize": new java.awt.Dimension( 360, 280 )
+						"inheritsPopupMenu": true
+						add( new FormComponent( "ui.custom.LinearInputBox" ) {
+							name: "edtUserName"
+							"maximumSize": &Dimension0 new java.awt.Dimension( 300, 30 )
+							"width": 300
+							"height": 30
+							"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+							"font": new java.awt.Font( "微软雅黑", 1, 16 )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 300
+							"height": 30
+							"x": 50
+							"y": 60
+						} )
+						add( new FormComponent( "ui.custom.LinearInputBox" ) {
+							name: "edtPassword"
+							"maximumSize": #Dimension0
+							"width": 300
+							"height": 30
+							"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+							"font": new java.awt.Font( "微软雅黑", 1, 16 )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 300
+							"height": 30
+							"x": 50
+							"y": 135
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "lbUser"
+							"text": "用户名"
+							"font": &Font0 new java.awt.Font( "微软雅黑", 0, 15 )
+							"foreground": sfield java.awt.Color gray
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 50
+							"y": 35
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "lbPassword"
+							"text": "密码"
+							"font": #Font0
+							"foreground": sfield java.awt.Color gray
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 45
+							"height": 20
+							"x": 50
+							"y": 115
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "btnLogin"
+							"icon": new com.jformdesigner.model.SwingIcon( 1, "E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\loginBtn_normal.png" )
+							"contentAreaFilled": false
+							"borderPainted": false
+							"focusPainted": false
+							"pressedIcon": new com.jformdesigner.model.SwingIcon( 1, "E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\loginBtn_selected.png" )
+							"rolloverIcon": new com.jformdesigner.model.SwingIcon( 1, "E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\loginBtn_hover.png" )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 195
+							"height": 40
+							"x": 95
+							"y": 230
+						} )
+						add( new FormComponent( "ui.custom.LinearInputBox" ) {
+							name: "linearInputBox1"
+							"width": 60
+							"height": 30
+							"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+							"maximumSize": new java.awt.Dimension( 60, 30 )
+							"text": "    注册"
+							"enabled": false
+							"font": new java.awt.Font( "微软雅黑", 0, 15 )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 290
+							"y": 280
+							"width": 70
+							"height": 30
+						} )
+						add( new FormComponent( "javax.swing.JCheckBox" ) {
+							name: "checkBox1"
+							"text": "记住密码"
+							"font": new java.awt.Font( "微软雅黑", 0, 15 )
+							"contentAreaFilled": false
+							"focusPainted": false
+							"foreground": sfield java.awt.Color gray
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 50
+							"y": 190
+						} )
+					} )
+				} )
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 317, 389 )
+		} )
+	}
+}
