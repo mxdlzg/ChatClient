@@ -53,4 +53,12 @@ public class LinearInputBox extends JTextField {
     public void setHeight(int height) {
         this.height = height;
     }
+
+    public float getBottomLineWidth() {
+        return bottomLineWidth;
+    }
+
+    public void setBottomLineWidth(float bottomLineWidth) {
+        this.bottomLineWidth = bottomLineWidth;
+    }
 }
