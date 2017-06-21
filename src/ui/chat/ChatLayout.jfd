@@ -14,46 +14,41 @@ new FormModel {
 				"maximumSize": new java.awt.Dimension( 1015, 640 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
 					name: "chatPanel"
+					"background": new java.awt.Color( 255, 255, 255, 255 )
 					add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 						name: "mainTab"
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 0
-						"y": -10
+						"y": 0
 						"width": 790
-						"height": 230
+						"height": 475
 					} )
-					add( new FormComponent( "ui.custom.ChatItem" ) {
-						name: "chatItem1"
-						"areaHeight": 200
-						"areaWidth": 300
-						"imgHeight": 50
-						"imgWidth": 50
-						"imgUrl": "resources/loginBtn_normal.png"
-						"content": "啊啊啊啊啊啊啊啊啊"
-					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 0
-						"y": 275
-						"width": 790
-						"height": 130
-					} )
-					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
-						name: "panel1"
-						add( new FormComponent( "ui.custom.PictureLabel" ) {
-							name: "pictureLabel2"
-							"text": "text"
-						}, new FormLayoutConstraints( class java.lang.String ) {
-							"value": "West"
-						} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane1"
+						"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 						add( new FormComponent( "javax.swing.JTextArea" ) {
 							name: "textArea1"
-						}, new FormLayoutConstraints( class java.lang.String ) {
-							"value": "Center"
+							"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-						"x": 155
-						"y": 450
-						"width": 425
-						"height": 115
+						"x": 0
+						"y": 475
+						"width": 735
+						"height": 120
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "btnSend"
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\btn_send.png" )
+						"borderPainted": false
+						"opaque": false
+						"contentAreaFilled": false
+						"rolloverIcon": new com.jformdesigner.model.SwingIcon( 1, "E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\btn_send_hover.png" )
+						"pressedIcon": new com.jformdesigner.model.SwingIcon( 1, "E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\btn_send_selected.png" )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 735
+						"y": 515
+						"width": 50
+						"height": 50
 					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"width": 790
