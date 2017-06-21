@@ -15,7 +15,7 @@ import java.awt.event.MouseEvent;
 /**
  * @author mxdlzg
  */
-public class RegisterLayout extends JFrame {
+public class RegisterLayout extends JDialog {
     private static final long serialVersionUID = 1L;
     private int oldX;
     private int oldY;
@@ -63,7 +63,7 @@ public class RegisterLayout extends JFrame {
     }
 
 
-    private RegisterLayout() {
+    public RegisterLayout() {
         this.setUndecorated(true);
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
@@ -74,6 +74,7 @@ public class RegisterLayout extends JFrame {
         rebuildShadow();
         rebuildDragged();
         initEvent();
+        this.setModal(true);
         this.setSize(400,800);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setVisible(true);
@@ -83,7 +84,7 @@ public class RegisterLayout extends JFrame {
         btnFormClose.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.exit(0);
+                RegisterLayout.this.dispose();
             }
         });
     }
