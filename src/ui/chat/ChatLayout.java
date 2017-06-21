@@ -5,7 +5,7 @@
 package ui.chat;
 
 import org.jdesktop.swingx.border.DropShadowBorder;
-import ui.custom.*;
+import ui.custom.ChatScrollPane;
 import ui.custom.PictureLabel;
 
 import javax.swing.*;
@@ -31,8 +31,18 @@ public class ChatLayout extends JFrame {
         initComponents();
         initForm();
         initComponentsSetting();
+        initEvent();
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
+    }
+
+    private void initEvent(){
+        btnFormClose.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
      /**
@@ -42,10 +52,22 @@ public class ChatLayout extends JFrame {
         mainPanel.setSize(1050,640);
         mainPanel.setBounds(0,0,1200,640);
 
+        ImageIcon imageIcon = new ImageIcon("resources/btn_send.png");
+        imageIcon.setImage(imageIcon.getImage().getScaledInstance(50,50,Image.SCALE_SMOOTH));
+        btnSend.setIcon(imageIcon);
+
         talkScrollPane.setViewportView(talkListPanel);
         talkScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0,0));
         talkScrollPane.getVerticalScrollBar().setUnitIncrement(10);
         talkScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        ChatScrollPane chatScrollPane = new ChatScrollPane();
+        chatScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(1,0));
+        chatScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        chatScrollPane.setBackground(Color.WHITE);
+
+        mainTab.setLayout(new BorderLayout());
+//        mainTab.addTab("chat1",null,chatScrollPane);
     }
 
     /**
@@ -85,10 +107,9 @@ public class ChatLayout extends JFrame {
         mainPanel = new JPanel();
         chatPanel = new JPanel();
         mainTab = new JTabbedPane();
-        chatItem1 = new ChatItem();
-        panel1 = new JPanel();
-        pictureLabel2 = new PictureLabel();
+        scrollPane1 = new JScrollPane();
         textArea1 = new JTextArea();
+        btnSend = new JButton();
         userPanel = new JPanel();
         talkScrollPane = new JScrollPane();
         talkListPanel = new JPanel();
@@ -113,31 +134,31 @@ public class ChatLayout extends JFrame {
 
             //======== chatPanel ========
             {
+                chatPanel.setBackground(Color.white);
                 chatPanel.setLayout(null);
                 chatPanel.add(mainTab);
-                mainTab.setBounds(0, -10, 790, 230);
+                mainTab.setBounds(0, 0, 790, 475);
 
-                //---- chatItem1 ----
-                chatItem1.setAreaHeight(200);
-                chatItem1.setAreaWidth(300);
-                chatItem1.setImgHeight(50);
-                chatItem1.setImgWidth(50);
-                chatItem1.setImgUrl("resources/loginBtn_normal.png");
-                chatItem1.setContent("\u554a\u554a\u554a\u554a\u554a\u554a\u554a\u554a\u554a");
-                chatPanel.add(chatItem1);
-                chatItem1.setBounds(0, 275, 790, 130);
-
-                //======== panel1 ========
+                //======== scrollPane1 ========
                 {
-                    panel1.setLayout(new BorderLayout());
+                    scrollPane1.setBorder(null);
 
-                    //---- pictureLabel2 ----
-                    pictureLabel2.setText("text");
-                    panel1.add(pictureLabel2, BorderLayout.WEST);
-                    panel1.add(textArea1, BorderLayout.CENTER);
+                    //---- textArea1 ----
+                    textArea1.setBorder(null);
+                    scrollPane1.setViewportView(textArea1);
                 }
-                chatPanel.add(panel1);
-                panel1.setBounds(155, 450, 425, 115);
+                chatPanel.add(scrollPane1);
+                scrollPane1.setBounds(0, 475, 735, 120);
+
+                //---- btnSend ----
+                btnSend.setIcon(new ImageIcon("E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\btn_send.png"));
+                btnSend.setBorderPainted(false);
+                btnSend.setOpaque(false);
+                btnSend.setContentAreaFilled(false);
+                btnSend.setRolloverIcon(new ImageIcon("E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\btn_send_hover.png"));
+                btnSend.setPressedIcon(new ImageIcon("E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\btn_send_selected.png"));
+                chatPanel.add(btnSend);
+                btnSend.setBounds(735, 515, 50, 50);
 
                 { // compute preferred size
                     Dimension preferredSize = new Dimension();
@@ -312,10 +333,9 @@ public class ChatLayout extends JFrame {
     private JPanel mainPanel;
     private JPanel chatPanel;
     private JTabbedPane mainTab;
-    private ChatItem chatItem1;
-    private JPanel panel1;
-    private PictureLabel pictureLabel2;
+    private JScrollPane scrollPane1;
     private JTextArea textArea1;
+    private JButton btnSend;
     private JPanel userPanel;
     private JScrollPane talkScrollPane;
     private JPanel talkListPanel;
