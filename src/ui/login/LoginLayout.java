@@ -4,12 +4,16 @@
 
 package ui.login;
 
+import controller.LoginControl;
 import org.jdesktop.swingx.border.DropShadowBorder;
 import ui.custom.LinearInputBox;
+import ui.custom.LinearPasswordBox;
 import ui.custom.PictureLabel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -17,6 +21,7 @@ import java.awt.event.MouseEvent;
  * @author mxdlzg
  */
 public class LoginLayout extends JFrame {
+    LoginControl loginControl;
     private int oldX;
     private int oldY;
 
@@ -30,6 +35,7 @@ public class LoginLayout extends JFrame {
         initForm();
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
+        loginControl = new LoginControl(this);
     }
 
     /**
@@ -39,9 +45,68 @@ public class LoginLayout extends JFrame {
         btnFormClose.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.exit(0);
+                loginControl.systemExit();
             }
         });
+        edtUserName.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (!edtUserName.getText().isEmpty()){
+                    lbUser.setText("用户名");
+                    lbUser.setForeground(Color.black);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (!edtUserName.getText().isEmpty()){
+                    lbUser.setText("用户名");
+                    lbUser.setForeground(Color.black);
+                }
+            }
+        });
+        edtPassword.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (!edtPassword.getText().isEmpty()){
+                    lbPassword.setText("密码");
+                    lbUser.setForeground(Color.black);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (!edtPassword.getText().isEmpty()){
+                    lbPassword.setText("密码");
+                    lbUser.setForeground(Color.black);
+                }
+            }
+        });
+        btnLogin.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (loginControl.checkInfo()){
+                    loginControl.login();
+                }
+            }
+        });
+        regisiterLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loginControl.register();
+            }
+        });
+        ckStore.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                loginControl.storePassword();
+            }
+        });
+    }
+
+    /**
+     * 控件设置
+     */
+    private void initSetting(){
+
     }
 
     /**
@@ -72,8 +137,9 @@ public class LoginLayout extends JFrame {
         mainPanel.setBorder(dropShadowBorder);
     }
 
-
-
+    /**
+     * 摆放控件
+     */
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         mainPanel = new JPanel();
@@ -83,12 +149,13 @@ public class LoginLayout extends JFrame {
         infoPanel = new JPanel();
         infoBuildPanel = new JPanel();
         edtUserName = new LinearInputBox();
-        edtPassword = new LinearInputBox();
+        edtPassword = new LinearPasswordBox();
         lbUser = new JLabel();
         lbPassword = new JLabel();
         btnLogin = new JButton();
-        linearInputBox1 = new LinearInputBox();
-        checkBox1 = new JCheckBox();
+        regisiterLabel = new LinearInputBox();
+        ckStore = new JCheckBox();
+        lbStatus = new JLabel();
 
         //======== this ========
         setMinimumSize(new Dimension(400, 500));
@@ -169,14 +236,14 @@ public class LoginLayout extends JFrame {
                     lbUser.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 15));
                     lbUser.setForeground(Color.gray);
                     infoBuildPanel.add(lbUser);
-                    lbUser.setBounds(new Rectangle(new Point(50, 35), lbUser.getPreferredSize()));
+                    lbUser.setBounds(50, 35, 185, lbUser.getPreferredSize().height);
 
                     //---- lbPassword ----
                     lbPassword.setText("\u5bc6\u7801");
                     lbPassword.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 15));
                     lbPassword.setForeground(Color.gray);
                     infoBuildPanel.add(lbPassword);
-                    lbPassword.setBounds(50, 115, 45, 20);
+                    lbPassword.setBounds(50, 115, 185, 20);
 
                     //---- btnLogin ----
                     btnLogin.setIcon(new ImageIcon("E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\loginBtn_normal.png"));
@@ -188,25 +255,30 @@ public class LoginLayout extends JFrame {
                     infoBuildPanel.add(btnLogin);
                     btnLogin.setBounds(95, 230, 195, 40);
 
-                    //---- linearInputBox1 ----
-                    linearInputBox1.setWidth(60);
-                    linearInputBox1.setHeight(30);
-                    linearInputBox1.setBorder(null);
-                    linearInputBox1.setMaximumSize(new Dimension(60, 30));
-                    linearInputBox1.setText("    \u6ce8\u518c");
-                    linearInputBox1.setEnabled(false);
-                    linearInputBox1.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 15));
-                    infoBuildPanel.add(linearInputBox1);
-                    linearInputBox1.setBounds(290, 280, 70, 30);
+                    //---- regisiterLabel ----
+                    regisiterLabel.setWidth(60);
+                    regisiterLabel.setHeight(30);
+                    regisiterLabel.setBorder(null);
+                    regisiterLabel.setMaximumSize(new Dimension(60, 30));
+                    regisiterLabel.setText("    \u6ce8\u518c");
+                    regisiterLabel.setEnabled(false);
+                    regisiterLabel.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 15));
+                    infoBuildPanel.add(regisiterLabel);
+                    regisiterLabel.setBounds(290, 280, 70, 30);
 
-                    //---- checkBox1 ----
-                    checkBox1.setText("\u8bb0\u4f4f\u5bc6\u7801");
-                    checkBox1.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 15));
-                    checkBox1.setContentAreaFilled(false);
-                    checkBox1.setFocusPainted(false);
-                    checkBox1.setForeground(Color.gray);
-                    infoBuildPanel.add(checkBox1);
-                    checkBox1.setBounds(new Rectangle(new Point(50, 190), checkBox1.getPreferredSize()));
+                    //---- ckStore ----
+                    ckStore.setText("\u8bb0\u4f4f\u5bc6\u7801");
+                    ckStore.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 15));
+                    ckStore.setContentAreaFilled(false);
+                    ckStore.setFocusPainted(false);
+                    ckStore.setForeground(Color.gray);
+                    infoBuildPanel.add(ckStore);
+                    ckStore.setBounds(new Rectangle(new Point(50, 190), ckStore.getPreferredSize()));
+
+                    //---- lbStatus ----
+                    lbStatus.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 15));
+                    infoBuildPanel.add(lbStatus);
+                    lbStatus.setBounds(95, 285, 180, 20);
 
                     { // compute preferred size
                         Dimension preferredSize = new Dimension();
@@ -232,6 +304,38 @@ public class LoginLayout extends JFrame {
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
+    public JCheckBox getCkStore() {
+        return ckStore;
+    }
+
+    public LinearInputBox getRegisiterLabel() {
+        return regisiterLabel;
+    }
+
+    public JButton getBtnLogin() {
+        return btnLogin;
+    }
+
+    public JLabel getLbPassword() {
+        return lbPassword;
+    }
+
+    public JLabel getLbUser() {
+        return lbUser;
+    }
+
+    public LinearInputBox getEdtUserName() {
+        return edtUserName;
+    }
+
+    public LinearPasswordBox getEdtPassword() {
+        return edtPassword;
+    }
+
+    public JLabel getLbStatus() {
+        return lbStatus;
+    }
+
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel mainPanel;
     private JLayeredPane layeredPane;
@@ -240,12 +344,13 @@ public class LoginLayout extends JFrame {
     private JPanel infoPanel;
     private JPanel infoBuildPanel;
     private LinearInputBox edtUserName;
-    private LinearInputBox edtPassword;
+    private LinearPasswordBox edtPassword;
     private JLabel lbUser;
     private JLabel lbPassword;
     private JButton btnLogin;
-    private LinearInputBox linearInputBox1;
-    private JCheckBox checkBox1;
+    private LinearInputBox regisiterLabel;
+    private JCheckBox ckStore;
+    private JLabel lbStatus;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public static void main(String[] args){
