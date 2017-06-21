@@ -4,6 +4,7 @@
 
 package ui.chat;
 
+import net.NetConnection;
 import org.jdesktop.swingx.border.DropShadowBorder;
 import ui.custom.ChatScrollPane;
 import ui.custom.PictureLabel;
@@ -34,13 +35,22 @@ public class ChatLayout extends JFrame {
         initEvent();
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
+        System.out.println(Thread.currentThread().getName()+"窗体");
     }
 
     private void initEvent(){
         btnFormClose.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                NetConnection.getNetConnection().close();
                 System.exit(0);
+            }
+        });
+
+        btnSend.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                NetConnection.getNetConnection().send("test");
             }
         });
     }
@@ -108,7 +118,7 @@ public class ChatLayout extends JFrame {
         chatPanel = new JPanel();
         mainTab = new JTabbedPane();
         scrollPane1 = new JScrollPane();
-        textArea1 = new JTextArea();
+        edtTextArea = new JTextArea();
         btnSend = new JButton();
         userPanel = new JPanel();
         talkScrollPane = new JScrollPane();
@@ -143,9 +153,9 @@ public class ChatLayout extends JFrame {
                 {
                     scrollPane1.setBorder(null);
 
-                    //---- textArea1 ----
-                    textArea1.setBorder(null);
-                    scrollPane1.setViewportView(textArea1);
+                    //---- edtTextArea ----
+                    edtTextArea.setBorder(null);
+                    scrollPane1.setViewportView(edtTextArea);
                 }
                 chatPanel.add(scrollPane1);
                 scrollPane1.setBounds(0, 475, 735, 120);
@@ -334,7 +344,7 @@ public class ChatLayout extends JFrame {
     private JPanel chatPanel;
     private JTabbedPane mainTab;
     private JScrollPane scrollPane1;
-    private JTextArea textArea1;
+    private JTextArea edtTextArea;
     private JButton btnSend;
     private JPanel userPanel;
     private JScrollPane talkScrollPane;
