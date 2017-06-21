@@ -14,6 +14,8 @@ public class ChatItem extends JPanel {
     private Color areaColor = Color.LIGHT_GRAY;
     private Color textColor = Color.DARK_GRAY;
 
+    private boolean rightToLeft = false;
+
     private int areaWidth;
     private int areaHeight;
 
@@ -22,24 +24,14 @@ public class ChatItem extends JPanel {
 
     private int margin = 15;
 
+    private static int maxWidth = 1600;
     private static int maxAreaWidth = 350;
     private int lineCount;
 
 
 
     public ChatItem(){
-        circlePictureLabel = new CirclePictureLabel();
-
-        textArea = new JTextArea();
-        Font font = new Font("微软雅黑",Font.PLAIN,16);
-        textArea.setFont(font);
-        textArea.setLineWrap(true);
-        textArea.setMargin(new Insets(5,20,5,20));
-
-        this.setLayout(null);
-        this.add(circlePictureLabel);
-        this.add(textArea);
-        this.setBackground(Color.white);
+        init(false);
     }
 
     public ChatItem(String imgUrl, String content, int areaWidth, int areaHeight, int imgWidth, int imgHeight, Color areaColor, Color textColor) {
@@ -51,7 +43,7 @@ public class ChatItem extends JPanel {
         this.imgHeight = imgHeight;
         this.areaColor = areaColor;
         this.textColor = textColor;
-        init();
+        init(true);
     }
 
     private void reCalHeight(){
@@ -59,39 +51,56 @@ public class ChatItem extends JPanel {
         lineCount = textArea.getText().length()/15;
         System.out.println(lineCount);
         this.areaHeight = lineCount*27;
-        this.areaWidth = textArea.getText().length()*15;
+        this.areaWidth = textArea.getText().length()*20;
         System.out.println(areaHeight);
         System.out.println(areaWidth);
     }
 
+    private void init(boolean refresh){
+        Font font = new Font("微软雅黑",Font.PLAIN,16);
+        circlePictureLabel = new CirclePictureLabel();
+        textArea = new JTextArea();
+        textArea.setFont(font);
+        textArea.setLineWrap(true);
+        textArea.setMargin(new Insets(5,20,5,20));
+
+        this.setPreferredSize(new Dimension(maxWidth,50));
+        this.setMaximumSize(new Dimension(maxWidth,50));
+        this.setLayout(null);
+        this.add(circlePictureLabel);
+        this.add(textArea);
+        this.setBackground(Color.white);
+        if (refresh){
+            refresh();
+        }
+    }
+
     private void refresh(){
-//        this.setBounds(0,0,getWidth(),getHeight());
         circlePictureLabel.setImgWidth(imgWidth);
         circlePictureLabel.setImgHeight(imgHeight);
         circlePictureLabel.setUrl(imgUrl);
-        circlePictureLabel.setBounds(10,10,imgWidth,imgHeight);
 
         textArea.setText(content);
         textArea.setBackground(areaColor);
         textArea.setForeground(textColor);
+
         reCalHeight();
-        textArea.setBounds(imgWidth+margin,imgHeight/4,lineCount>1?maxAreaWidth:areaWidth,lineCount>1?areaHeight:30);
-        this.setPreferredSize(new Dimension(lineCount>1?maxAreaWidth:areaWidth,lineCount>1?areaHeight:30));
+        System.out.println(lineCount>1?maxAreaWidth:areaWidth);
+        System.out.println(lineCount>1?areaHeight:30);
+
+        if (rightToLeft){
+            circlePictureLabel.setBounds(790-imgWidth-10,10,imgWidth,imgHeight);
+            textArea.setBounds(790-imgWidth-textArea.getWidth()-margin,imgHeight/4,lineCount>1?maxAreaWidth:areaWidth,lineCount>1?areaHeight:30);
+        }else {
+            circlePictureLabel.setBounds(10,10,imgWidth,imgHeight);
+            textArea.setBounds(imgWidth+margin,imgHeight/4,lineCount>1?maxAreaWidth:areaWidth,lineCount>1?areaHeight:30);
+        }
+        this.setMaximumSize(new Dimension(maxWidth,lineCount>1?areaHeight+30:60));
+//        this.setMinimumSize(new Dimension(790,50));
+
+//        this.setPreferredSize(new Dimension(lineCount>1?maxAreaWidth:areaWidth,lineCount>1?areaHeight:30));
 //        textArea.setWrapStyleWord(true);
 //        textArea.setBounds(imgWidth+margin,imgHeight/4,textArea.getLineCount()==1?areaWidth:maxAreaWidth,areaHeight);
-    }
-
-    private void init(){
-        this.setBounds(0,0,areaWidth,areaHeight);
-
-        circlePictureLabel = new CirclePictureLabel(imgUrl,imgWidth,imgHeight);
-        circlePictureLabel.setBounds(5,5,imgWidth,imgHeight);
-        this.add(circlePictureLabel);
-
-        textArea = new JTextArea(content);
-        textArea.setBackground(areaColor);
-        textArea.setForeground(textColor);
-        this.add(textArea);
     }
 
     public String getImgUrl() {
@@ -160,4 +169,12 @@ public class ChatItem extends JPanel {
         this.imgHeight = imgHeight;
     }
 
+    public boolean isRightToLeft() {
+        return rightToLeft;
+    }
+
+    public void setRightToLeft(boolean rightToLeft) {
+        this.rightToLeft = rightToLeft;
+        refresh();
+    }
 }
