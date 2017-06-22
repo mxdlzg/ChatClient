@@ -3,6 +3,7 @@ package controller;
 import entity.Config;
 import net.Login;
 import net.NetConnection;
+import ui.chat.ChatLayout;
 import ui.login.LoginLayout;
 import ui.register.RegisterLayout;
 
@@ -52,9 +53,10 @@ public class LoginControl {
         loginReceiveListener = new NetConnection.onReceiveListener() {
             @Override
             public void onReceive(String content) {
+                System.out.println("login listener:"+content);
                 String[] result = content.split(Config.SEPARATOR);
                 if (result[0].equals(Config.LOGIN)){
-                    if (result[1].equals("1")){
+                    if (result[1].equals(String.valueOf(Config.SUCCESS_LOGIN))){
                         if (successCallback!=null){
                             successCallback.onSuccess(result[2]);
                         }
@@ -70,7 +72,9 @@ public class LoginControl {
             @Override
             public void onSuccess(String token) {
                 Config.token = token;
+                Config.user = loginLayout.getEdtUserName().getText();
                 loginLayout.setVisible(false);
+                new ChatLayout();
             }
         };
         failCallback = new FailCallback() {
@@ -102,6 +106,7 @@ public class LoginControl {
      */
     public void systemExit(){
         Config.storeProperties();
+        NetConnection.getNetConnection().close();
         System.exit(0);
     }
 
