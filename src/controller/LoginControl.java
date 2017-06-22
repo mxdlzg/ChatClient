@@ -74,7 +74,7 @@ public class LoginControl {
                 Config.token = token;
                 Config.user = loginLayout.getEdtUserName().getText();
                 loginLayout.setVisible(false);
-                new ChatLayout();
+                ChatLayout chatLayout = new ChatLayout();
             }
         };
         failCallback = new FailCallback() {
