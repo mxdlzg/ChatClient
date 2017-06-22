@@ -29,6 +29,7 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JTextArea" ) {
 							name: "edtTextArea"
 							"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+							"font": new java.awt.Font( "微软雅黑", 0, 17 )
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 0
@@ -134,6 +135,15 @@ new FormModel {
 						"y": 10
 						"height": 30
 						"width": 30
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "lbTitle"
+						"font": new java.awt.Font( "微软雅黑", 1, 16 )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+						"x": 380
+						"y": 5
+						"width": 555
+						"height": 30
 					} )
 				}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 					"x": 5
