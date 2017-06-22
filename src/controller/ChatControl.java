@@ -166,7 +166,17 @@ public class ChatControl {
      */
     public void send(){
         //需要 当前user
-        chatTo();
+        try {
+            if (mainTab.getSelectedIndex() == selectedIndex){
+                chatTo();
+                chatLayout.getLbTitle().setText(Config.user+"");
+            }else {
+                chatLayout.getLbTitle().setText(Config.user+"---不能发送空消息");
+            }
+        } catch (Exception e) {
+            chatLayout.getLbTitle().setText(Config.user+"---不能发送空消息");
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -182,7 +192,7 @@ public class ChatControl {
      * 选择对话者之后，如果没有被添加tab，需要添加tab
      */
     public void addCurrentTab(int index){
-        System.out.println("add");
+//        System.out.println("add");
         ChatScrollPane chatScrollPane = new ChatScrollPane();
         chatScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(3,0));
         chatScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -232,10 +242,10 @@ public class ChatControl {
                 break;
             }
         }
-        System.out.println("index:"+index);
+//        System.out.println("index:"+index);
         talkListPanel.revalidate();
         talkListPanel.repaint();
-        System.out.println(personList.size());
+//        System.out.println(personList.size());
     }
 
     /**
