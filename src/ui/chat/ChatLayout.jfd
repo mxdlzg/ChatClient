@@ -66,9 +66,13 @@ new FormModel {
 						name: "talkScrollPane"
 						"border": new org.jdesktop.swingx.border.DropShadowBorder( sfield java.awt.Color black, 5, 0.5f, 12, false, false, true, true )
 						"viewportBorder": sfield com.jformdesigner.model.FormObject NULL_VALUE
-						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jformdesigner.runtime.NullLayout ) ) {
+						"preferredSize": new java.awt.Dimension( 230, 1000 )
+						add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class javax.swing.BoxLayout ) {
+							"axis": 1
+						} ) {
 							name: "talkListPanel"
 							"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+							"preferredSize": new java.awt.Dimension( 225, 1000 )
 						} )
 					}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
 						"x": 0
