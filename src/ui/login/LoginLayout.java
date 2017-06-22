@@ -69,14 +69,14 @@ public class LoginLayout extends JFrame {
             public void focusGained(FocusEvent e) {
                 if (!edtPassword.getText().isEmpty()){
                     lbPassword.setText("密码");
-                    lbUser.setForeground(Color.black);
+                    lbPassword.setForeground(Color.black);
                 }
             }
             @Override
             public void focusLost(FocusEvent e) {
                 if (!edtPassword.getText().isEmpty()){
                     lbPassword.setText("密码");
-                    lbUser.setForeground(Color.black);
+                    lbPassword.setForeground(Color.black);
                 }
             }
         });
