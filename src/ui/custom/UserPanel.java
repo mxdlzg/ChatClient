@@ -10,13 +10,16 @@ public class UserPanel extends JLayeredPane {
     private PictureLabel pictureLabel;
     private PictureLabel circleBlock;
     private JLabel label;
-    private String pcUrl;
-    private String text;
+    private String pcUrl = "resources/loginBtn_hover.png";
+    private String text = "用户名";
+    private boolean selected = false;
+    private int index;
 
     public UserPanel(){
         setOpaque(true);
         setBackground(Color.white);
         setBounds(0,0,210,75);
+        setPreferredSize(new Dimension(450,75));
         setMaximumSize(new Dimension(450,75));
         init();
         this.add(circleBlock);
@@ -27,9 +30,9 @@ public class UserPanel extends JLayeredPane {
     public void init(){
         circleBlock = new PictureLabel("resources/circle.png",66,66);
         circleBlock.setBounds(25,4,66,66);
-        pictureLabel = new PictureLabel("resources/loginBtn_hover.png",65,65);
+        pictureLabel = new PictureLabel(pcUrl,65,65);
         pictureLabel.setBounds(25,5,65,65);
-        label = new JLabel("用户名");
+        label = new JLabel(text);
         Font font = new Font("微软雅黑",Font.BOLD,16);
         label.setFont(font);
         label.setBounds(100,30,210,20);
@@ -42,6 +45,7 @@ public class UserPanel extends JLayeredPane {
         graphics2D.setStroke(new BasicStroke(1));
         graphics2D.setColor(Color.lightGray);
         graphics2D.drawLine(0,74,230,74);
+//        graphics2D.dispose();
     }
 
     public void refresh(){
@@ -55,6 +59,7 @@ public class UserPanel extends JLayeredPane {
 
     public void setPcUrl(String pcUrl) {
         this.pcUrl = pcUrl;
+        refresh();
     }
 
     public String getText() {
@@ -63,5 +68,14 @@ public class UserPanel extends JLayeredPane {
 
     public void setText(String text) {
         this.text = text;
+        refresh();
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }
