@@ -50,18 +50,18 @@ public class ChatItem extends JPanel {
 
     private void reCalHeight(){
         String content = textArea.getText();
-        System.out.println(content.length());
+//        System.out.println(content.length());
         int count = Util.countblank(content);
         lineCount = content.length()/15+count;
-        System.out.println("lineCount"+lineCount);
+//        System.out.println("lineCount"+lineCount);
         this.areaHeight = lineCount*27;
         if (content.length()<=2){
             this.areaWidth = content.length()*50;
         }else {
             this.areaWidth = content.length()*26;
         }
-        System.out.println(areaHeight);
-        System.out.println(areaWidth);
+//        System.out.println(areaHeight);
+//        System.out.println(areaWidth);
     }
 
     private void init(boolean refresh){
@@ -93,8 +93,8 @@ public class ChatItem extends JPanel {
         textArea.setForeground(textColor);
 
         reCalHeight();
-        System.out.println("area width:"+(lineCount>1?maxAreaWidth:areaWidth));
-        System.out.println("area height:"+(lineCount>1?areaHeight:60));
+//        System.out.println("area width:"+(lineCount>1?maxAreaWidth:areaWidth));
+//        System.out.println("area height:"+(lineCount>1?areaHeight:60));
 
         if (rightToLeft){
             circlePictureLabel.setBounds(790-imgWidth-10,10,imgWidth,imgHeight);
