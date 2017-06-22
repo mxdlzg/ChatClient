@@ -60,129 +60,70 @@ new FormModel {
 							name: "lbUser"
 							"text": "用户名"
 							"preferredSize": &Dimension0 new java.awt.Dimension( 40, 20 )
-							"horizontalAlignment": 0
+							"horizontalAlignment": 2
 							"font": &Font0 new java.awt.Font( "微软雅黑", 0, 14 )
 							"background": &Color0 new java.awt.Color( 255, 255, 255, 255 )
 							"opaque": true
 							"alignmentX": 200.0f
 							"foreground": sfield java.awt.Color gray
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 110
-							"x": 5
+							"width": 200
+							"x": 35
 							"y": 15
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "lbLine1"
-							"text": "__________________________________________"
-							"foreground": sfield java.awt.Color gray
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"x": 40
-							"y": 55
-							"width": 320
-						} )
-						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "inputUserName"
-							"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
-							"font": &Font1 new java.awt.Font( "微软雅黑", 0, 16 )
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"x": 40
-							"y": 40
-							"width": 295
-							"height": 25
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "lbUser2"
+							name: "lbFirstPassword"
 							"text": "密码"
 							"preferredSize": #Dimension0
-							"horizontalAlignment": 0
+							"horizontalAlignment": 2
 							"font": #Font0
 							"background": #Color0
 							"opaque": true
 							"alignmentX": 200.0f
 							"foreground": sfield java.awt.Color gray
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 110
+							"width": 170
 							"height": 20
-							"x": 0
-							"y": 90
+							"x": 35
+							"y": 85
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "lbLine2"
-							"text": "__________________________________________"
-							"foreground": sfield java.awt.Color gray
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 320
-							"height": 20
-							"x": 40
-							"y": 130
-						} )
-						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "inputUserName2"
-							"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
-							"font": #Font1
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 295
-							"height": 25
-							"x": 40
-							"y": 115
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "lbUser3"
+							name: "lbSecondPassword"
 							"text": "确认密码"
 							"preferredSize": #Dimension0
-							"horizontalAlignment": 0
+							"horizontalAlignment": 2
 							"font": #Font0
 							"background": #Color0
 							"opaque": true
 							"alignmentX": 200.0f
 							"foreground": sfield java.awt.Color gray
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 110
+							"width": 175
 							"height": 20
-							"x": 15
-							"y": 165
+							"x": 35
+							"y": 155
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "lbLine3"
-							"text": "__________________________________________"
-							"foreground": sfield java.awt.Color gray
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 320
-							"height": 20
-							"x": 40
-							"y": 205
-						} )
-						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "inputUserName3"
-							"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
-							"font": #Font1
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 295
-							"height": 25
-							"x": 40
-							"y": 190
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "lbUser4"
+							name: "lbSex"
 							"text": "性别"
 							"preferredSize": #Dimension0
-							"horizontalAlignment": 0
+							"horizontalAlignment": 2
 							"font": #Font0
 							"background": #Color0
 							"opaque": true
 							"alignmentX": 200.0f
 							"foreground": sfield java.awt.Color gray
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 110
+							"width": 95
 							"height": 20
-							"x": 0
+							"x": 35
 							"y": 325
 						} )
 						add( new FormComponent( "javax.swing.JCheckBox" ) {
-							name: "checkBox2"
+							name: "cbFemale"
 							"text": "女"
 							"opaque": false
-							"font": &Font2 new java.awt.Font( "微软雅黑", 0, 15 )
+							"font": &Font1 new java.awt.Font( "微软雅黑", 0, 15 )
 							"focusPainted": false
 							"focusable": false
 							"contentAreaFilled": false
@@ -193,9 +134,9 @@ new FormModel {
 							"y": 320
 						} )
 						add( new FormComponent( "javax.swing.JCheckBox" ) {
-							name: "checkBox3"
+							name: "cbMale"
 							"text": "男"
-							"font": #Font2
+							"font": #Font1
 							"contentAreaFilled": false
 							"focusable": false
 							"focusPainted": false
@@ -207,43 +148,23 @@ new FormModel {
 							"y": 320
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "lbUser5"
+							name: "lbCity"
 							"text": "城市"
 							"preferredSize": #Dimension0
-							"horizontalAlignment": 0
+							"horizontalAlignment": 2
 							"font": #Font0
 							"background": #Color0
 							"opaque": true
 							"alignmentX": 200.0f
 							"foreground": sfield java.awt.Color gray
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 110
+							"width": 165
 							"height": 20
-							"x": 0
-							"y": 235
-						} )
-						add( new FormComponent( "javax.swing.JTextField" ) {
-							name: "inputUserName4"
-							"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
-							"font": #Font1
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 295
-							"height": 25
-							"x": 40
-							"y": 260
-						} )
-						add( new FormComponent( "javax.swing.JLabel" ) {
-							name: "lbLine4"
-							"text": "__________________________________________"
-							"foreground": sfield java.awt.Color gray
-						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"width": 320
-							"height": 20
-							"x": 40
-							"y": 275
+							"x": 35
+							"y": 225
 						} )
 						add( new FormComponent( "javax.swing.JButton" ) {
-							name: "button1"
+							name: "btnRegister"
 							"icon": new com.jformdesigner.model.SwingIcon( 1, "E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\registerBtn_first_normal.png" )
 							"contentAreaFilled": false
 							"borderPainted": false
@@ -251,10 +172,66 @@ new FormModel {
 							"pressedIcon": new com.jformdesigner.model.SwingIcon( 1, "E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\registerBtn_selected.png" )
 							"rolloverIcon": new com.jformdesigner.model.SwingIcon( 1, "E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\registerBtn_normal.png" )
 						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
-							"x": 95
-							"y": 395
+							"x": 100
+							"y": 375
 							"width": 195
 							"height": 50
+						} )
+						add( new FormComponent( "ui.custom.LinearPasswordBox" ) {
+							name: "edtFirstPassword"
+							"width": 300
+							"height": 30
+							"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 40
+							"y": 110
+							"width": 300
+							"height": 30
+						} )
+						add( new FormComponent( "ui.custom.LinearInputBox" ) {
+							name: "edtUserName"
+							"height": 30
+							"width": 300
+							"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+							"font": new java.awt.Font( "微软雅黑", 1, 16 )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 40
+							"y": 35
+							"width": 300
+							"height": 30
+						} )
+						add( new FormComponent( "ui.custom.LinearPasswordBox" ) {
+							name: "edtSecondPassword"
+							"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+							"width": 300
+							"height": 30
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"width": 300
+							"height": 30
+							"x": 40
+							"y": 185
+						} )
+						add( new FormComponent( "ui.custom.LinearInputBox" ) {
+							name: "edtCity"
+							"font": new java.awt.Font( "微软雅黑", 1, 16 )
+							"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+							"width": 300
+							"height": 30
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 40
+							"y": 260
+							"width": 300
+							"height": 30
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "lbStatus"
+							"font": new java.awt.Font( "微软雅黑", 1, 15 )
+							"foreground": sfield java.awt.Color red
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.NullConstraints ) {
+							"x": 75
+							"y": 445
+							"width": 235
+							"height": 25
 						} )
 					} )
 				} )
