@@ -9,7 +9,13 @@ import java.awt.*;
 public class ChatScrollPane extends JScrollPane {
     private JPanel chatPanel;
     private int scrollHeight = 475;
+    private int itemHeight = 0;
 
+    private int index;
+
+    /**
+     * 构造
+     */
     public ChatScrollPane(){
         chatPanel = new JPanel();
         chatPanel.setLayout(new BoxLayout(chatPanel,BoxLayout.Y_AXIS));
@@ -26,7 +32,12 @@ public class ChatScrollPane extends JScrollPane {
      */
     public void addItem(ChatItem item){
         chatPanel.add(item);
-        Dimension dimension = new Dimension(790, (int) (scrollHeight+item.getMaximumSize().getHeight()));
+        itemHeight += item.getMaximumSize().getHeight();
+        //如果预设高度不能满足内容则增加高度
+        if (itemHeight > scrollHeight){
+            scrollHeight += item.getMaximumSize().getHeight();
+        }
+        Dimension dimension = new Dimension(790, scrollHeight);
         chatPanel.setPreferredSize(dimension);
         System.out.println("chatlayout"+chatPanel.getPreferredSize());
     }
@@ -39,5 +50,11 @@ public class ChatScrollPane extends JScrollPane {
         this.chatPanel = chatPanel;
     }
 
+    public int getIndex() {
+        return index;
+    }
 
+    public void setIndex(int index) {
+        this.index = index;
+    }
 }
