@@ -39,7 +39,7 @@ public class ChatScrollPane extends JScrollPane {
         }
         Dimension dimension = new Dimension(790, scrollHeight);
         chatPanel.setPreferredSize(dimension);
-        System.out.println("chatlayout"+chatPanel.getPreferredSize());
+//        System.out.println("chatlayout"+chatPanel.getPreferredSize());
     }
 
     public JPanel getChatPanel() {
