@@ -4,7 +4,7 @@
 
 package ui.chat;
 
-import net.NetConnection;
+import controller.ChatControl;
 import org.jdesktop.swingx.border.DropShadowBorder;
 import ui.custom.ChatScrollPane;
 import ui.custom.PictureLabel;
@@ -17,7 +17,8 @@ import java.awt.event.MouseEvent;
 /**
  * @author mxdlzg
  */
-public class ChatLayout extends JFrame {
+public class ChatLayout extends JFrame{
+    private ChatControl chatControl;
     private int oldX;
     private int oldY;
 
@@ -28,12 +29,13 @@ public class ChatLayout extends JFrame {
 //        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
 //            e.printStackTrace();
 //        }
+        chatControl = new ChatControl(this);
         this.setUndecorated(true);
         initComponents();
         initForm();
         initComponentsSetting();
         initEvent();
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setVisible(true);
         System.out.println(Thread.currentThread().getName()+"窗体");
     }
@@ -42,15 +44,14 @@ public class ChatLayout extends JFrame {
         btnFormClose.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                NetConnection.getNetConnection().close();
-                System.exit(0);
+                chatControl.systemExit();
             }
         });
 
         btnSend.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                NetConnection.getNetConnection().send("test");
+                chatControl.send();
             }
         });
     }
@@ -67,7 +68,7 @@ public class ChatLayout extends JFrame {
         btnSend.setIcon(imageIcon);
 
         talkScrollPane.setViewportView(talkListPanel);
-        talkScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0,0));
+        talkScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(1,0));
         talkScrollPane.getVerticalScrollBar().setUnitIncrement(10);
         talkScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -107,6 +108,22 @@ public class ChatLayout extends JFrame {
         dropShadowBorder.setShowBottomShadow(true);
         mainPanel.setBorder(dropShadowBorder);
 
+    }
+
+    public JTextArea getEdtTextArea() {
+        return edtTextArea;
+    }
+
+    public JTabbedPane getMainTab() {
+        return mainTab;
+    }
+
+    public JPanel getTalkListPanel() {
+        return talkListPanel;
+    }
+
+    public JScrollPane getTalkScrollPane() {
+        return talkScrollPane;
     }
 
     private void createUIComponents() {
@@ -199,25 +216,13 @@ public class ChatLayout extends JFrame {
                 {
                     talkScrollPane.setBorder(new DropShadowBorder());
                     talkScrollPane.setViewportBorder(null);
+                    talkScrollPane.setPreferredSize(new Dimension(230, 1000));
 
                     //======== talkListPanel ========
                     {
                         talkListPanel.setBorder(null);
-                        talkListPanel.setLayout(null);
-
-                        { // compute preferred size
-                            Dimension preferredSize = new Dimension();
-                            for(int i = 0; i < talkListPanel.getComponentCount(); i++) {
-                                Rectangle bounds = talkListPanel.getComponent(i).getBounds();
-                                preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-                                preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-                            }
-                            Insets insets = talkListPanel.getInsets();
-                            preferredSize.width += insets.right;
-                            preferredSize.height += insets.bottom;
-                            talkListPanel.setMinimumSize(preferredSize);
-                            talkListPanel.setPreferredSize(preferredSize);
-                        }
+                        talkListPanel.setPreferredSize(new Dimension(225, 1000));
+                        talkListPanel.setLayout(new BoxLayout(talkListPanel, BoxLayout.Y_AXIS));
                     }
                     talkScrollPane.setViewportView(talkListPanel);
                 }
