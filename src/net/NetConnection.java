@@ -1,6 +1,7 @@
 package net;
 
 import entity.Config;
+import util.MessageFormat;
 
 import java.io.*;
 import java.net.Socket;
@@ -37,12 +38,14 @@ public class NetConnection {
                 try {
                     socket = new Socket(localIP,port);
                     System.out.println("socket connect");
-                    reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                    reader = new BufferedReader(new InputStreamReader(socket.getInputStream(),Config.CHAR_SET));
                     writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
                     String line;
                     System.out.println(Thread.currentThread().getName()+"net层");
                     while ((line = reader.readLine()) != null){
+                        System.out.println("socket receive:"+line);
                         if (receiveListener != null){
+                            System.out.println("socket receive:"+line);
                             receiveListener.onReceive(line);
                         }
                     }
@@ -64,7 +67,7 @@ public class NetConnection {
      */
     public void close(){
         try {
-            send(Config.CLOSE_SOCKET);
+            send(MessageFormat.formatMessage(Config.CLOSE_SOCKET,Config.user));
             if (socket != null){
                 socket.close();
                 writer.close();
@@ -82,7 +85,8 @@ public class NetConnection {
     public void send(String content){
         if (socket != null){
             try {
-                socket.getOutputStream().write((content+"\n").getBytes("gbk"));
+                socket.getOutputStream().write((content+"\n").getBytes(Config.CHAR_SET));
+                System.out.println("socket send:"+content);
             } catch (IOException e) {
                 e.printStackTrace();
             }
