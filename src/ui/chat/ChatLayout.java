@@ -5,6 +5,7 @@
 package ui.chat;
 
 import controller.ChatControl;
+import entity.Config;
 import org.jdesktop.swingx.border.DropShadowBorder;
 import ui.custom.ChatScrollPane;
 import ui.custom.PictureLabel;
@@ -37,6 +38,7 @@ public class ChatLayout extends JFrame{
         initEvent();
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setVisible(true);
+        lbTitle.setText(Config.user);
         System.out.println(Thread.currentThread().getName()+"窗体");
     }
 
@@ -79,6 +81,8 @@ public class ChatLayout extends JFrame{
 
         mainTab.setLayout(new BorderLayout());
 //        mainTab.addTab("chat1",null,chatScrollPane);
+
+//        lbTitle.setText(Config.user);
     }
 
     /**
@@ -126,6 +130,10 @@ public class ChatLayout extends JFrame{
         return talkScrollPane;
     }
 
+    public JLabel getLbTitle() {
+        return lbTitle;
+    }
+
     private void createUIComponents() {
         // TODO: add custom component creation code here
     }
@@ -144,6 +152,7 @@ public class ChatLayout extends JFrame{
         btnFormClose = new JButton();
         edtSearch = new JTextField();
         pictureLabel1 = new PictureLabel();
+        lbTitle = new JLabel();
         posPanel = new JPanel();
 
         //======== this ========
@@ -172,6 +181,7 @@ public class ChatLayout extends JFrame{
 
                     //---- edtTextArea ----
                     edtTextArea.setBorder(null);
+                    edtTextArea.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 17));
                     scrollPane1.setViewportView(edtTextArea);
                 }
                 chatPanel.add(scrollPane1);
@@ -285,6 +295,11 @@ public class ChatLayout extends JFrame{
                 statusPanel.add(pictureLabel1);
                 pictureLabel1.setBounds(15, 10, 30, 30);
 
+                //---- lbTitle ----
+                lbTitle.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.BOLD, 16));
+                statusPanel.add(lbTitle);
+                lbTitle.setBounds(380, 5, 555, 30);
+
                 { // compute preferred size
                     Dimension preferredSize = new Dimension();
                     for(int i = 0; i < statusPanel.getComponentCount(); i++) {
@@ -358,6 +373,7 @@ public class ChatLayout extends JFrame{
     private JButton btnFormClose;
     private JTextField edtSearch;
     private PictureLabel pictureLabel1;
+    private JLabel lbTitle;
     private JPanel posPanel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
