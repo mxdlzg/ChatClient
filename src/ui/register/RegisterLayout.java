@@ -4,11 +4,15 @@
 
 package ui.register;
 
+import controller.RegisterControl;
 import org.jdesktop.swingx.border.DropShadowBorder;
+import ui.custom.*;
 import ui.custom.PictureLabel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -17,6 +21,7 @@ import java.awt.event.MouseEvent;
  */
 public class RegisterLayout extends JDialog {
     private static final long serialVersionUID = 1L;
+    private RegisterControl registerControl;
     private int oldX;
     private int oldY;
 
@@ -65,6 +70,7 @@ public class RegisterLayout extends JDialog {
 
     public RegisterLayout() {
         this.setUndecorated(true);
+        registerControl = new RegisterControl(this);
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Dimension dimension = toolkit.getScreenSize();
 //        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -87,10 +93,140 @@ public class RegisterLayout extends JDialog {
                 RegisterLayout.this.dispose();
             }
         });
+        btnRegister.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                registerControl.register();
+            }
+        });
+        edtUserName.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                resetColor(edtUserName,lbUser,"用户名");
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                resetColor(edtUserName,lbUser,"用户名");
+            }
+        });
+        edtFirstPassword.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                resetColor(edtFirstPassword,lbFirstPassword,"密码");
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                resetColor(edtFirstPassword,lbFirstPassword,"密码");
+            }
+        });
+        edtSecondPassword.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                resetColor(edtSecondPassword,lbSecondPassword,"确认密码");
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                resetColor(edtSecondPassword,lbSecondPassword,"确认密码");
+            }
+        });
+        edtCity.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                resetColor(edtCity,lbCity,"城市");
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                resetColor(edtCity,lbCity,"城市");
+            }
+        });
+        cbMale.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (cbMale.isSelected()){
+                    if (cbFemale.isSelected()){
+                        cbFemale.setSelected(false);
+                    }
+                    lbSex.setText("性别");
+                    lbSex.setForeground(Color.GRAY);
+                }
+            }
+        });
+        cbFemale.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (cbFemale.isSelected()){
+                    if (cbMale.isSelected()){
+                        cbMale.setSelected(false);
+                    }
+                    lbSex.setText("性别");
+                    lbSex.setForeground(Color.GRAY);
+                }
+            }
+        });
     }
 
+    private void resetColor(JTextField edt,JLabel lb,String info){
+        if (!edt.getText().isEmpty()){
+            lb.setText(info);
+            lb.setForeground(Color.black);
+        }
+    }
 
+    public JLabel getLbUser() {
+        return lbUser;
+    }
 
+    public JLabel getLbFirstPassword() {
+        return lbFirstPassword;
+    }
+
+    public JLabel getLbSex() {
+        return lbSex;
+    }
+
+    public JLabel getLbSecondPassword() {
+        return lbSecondPassword;
+    }
+
+    public JCheckBox getCbFemale() {
+        return cbFemale;
+    }
+
+    public JCheckBox getCbMale() {
+        return cbMale;
+    }
+
+    public JLabel getLbCity() {
+        return lbCity;
+    }
+
+    public JButton getBtnRegister() {
+        return btnRegister;
+    }
+
+    public LinearPasswordBox getEdtFirstPassword() {
+        return edtFirstPassword;
+    }
+
+    public LinearInputBox getEdtUserName() {
+        return edtUserName;
+    }
+
+    public LinearPasswordBox getEdtSecondPassword() {
+        return edtSecondPassword;
+    }
+
+    public LinearInputBox getEdtCity() {
+        return edtCity;
+    }
+
+    public JLabel getLbStatus() {
+        return lbStatus;
+    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -101,21 +237,18 @@ public class RegisterLayout extends JDialog {
         infoPanel = new JPanel();
         infoBuildPanel = new JPanel();
         lbUser = new JLabel();
-        lbLine1 = new JLabel();
-        inputUserName = new JTextField();
-        lbUser2 = new JLabel();
-        lbLine2 = new JLabel();
-        inputUserName2 = new JTextField();
-        lbUser3 = new JLabel();
-        lbLine3 = new JLabel();
-        inputUserName3 = new JTextField();
-        lbUser4 = new JLabel();
-        checkBox2 = new JCheckBox();
-        checkBox3 = new JCheckBox();
-        lbUser5 = new JLabel();
-        inputUserName4 = new JTextField();
-        lbLine4 = new JLabel();
-        button1 = new JButton();
+        lbFirstPassword = new JLabel();
+        lbSecondPassword = new JLabel();
+        lbSex = new JLabel();
+        cbFemale = new JCheckBox();
+        cbMale = new JCheckBox();
+        lbCity = new JLabel();
+        btnRegister = new JButton();
+        edtFirstPassword = new LinearPasswordBox();
+        edtUserName = new LinearInputBox();
+        edtSecondPassword = new LinearPasswordBox();
+        edtCity = new LinearInputBox();
+        lbStatus = new JLabel();
 
         //======== this ========
         setBackground(Color.white);
@@ -174,140 +307,128 @@ public class RegisterLayout extends JDialog {
                     //---- lbUser ----
                     lbUser.setText("\u7528\u6237\u540d");
                     lbUser.setPreferredSize(new Dimension(40, 20));
-                    lbUser.setHorizontalAlignment(SwingConstants.CENTER);
+                    lbUser.setHorizontalAlignment(SwingConstants.LEFT);
                     lbUser.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 14));
                     lbUser.setBackground(Color.white);
                     lbUser.setOpaque(true);
                     lbUser.setAlignmentX(200.0F);
                     lbUser.setForeground(Color.gray);
                     infoBuildPanel.add(lbUser);
-                    lbUser.setBounds(5, 15, 110, lbUser.getPreferredSize().height);
+                    lbUser.setBounds(35, 15, 200, lbUser.getPreferredSize().height);
 
-                    //---- lbLine1 ----
-                    lbLine1.setText("__________________________________________");
-                    lbLine1.setForeground(Color.gray);
-                    infoBuildPanel.add(lbLine1);
-                    lbLine1.setBounds(40, 55, 320, lbLine1.getPreferredSize().height);
+                    //---- lbFirstPassword ----
+                    lbFirstPassword.setText("\u5bc6\u7801");
+                    lbFirstPassword.setPreferredSize(new Dimension(40, 20));
+                    lbFirstPassword.setHorizontalAlignment(SwingConstants.LEFT);
+                    lbFirstPassword.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 14));
+                    lbFirstPassword.setBackground(Color.white);
+                    lbFirstPassword.setOpaque(true);
+                    lbFirstPassword.setAlignmentX(200.0F);
+                    lbFirstPassword.setForeground(Color.gray);
+                    infoBuildPanel.add(lbFirstPassword);
+                    lbFirstPassword.setBounds(35, 85, 170, 20);
 
-                    //---- inputUserName ----
-                    inputUserName.setBorder(null);
-                    inputUserName.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
-                    infoBuildPanel.add(inputUserName);
-                    inputUserName.setBounds(40, 40, 295, 25);
+                    //---- lbSecondPassword ----
+                    lbSecondPassword.setText("\u786e\u8ba4\u5bc6\u7801");
+                    lbSecondPassword.setPreferredSize(new Dimension(40, 20));
+                    lbSecondPassword.setHorizontalAlignment(SwingConstants.LEFT);
+                    lbSecondPassword.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 14));
+                    lbSecondPassword.setBackground(Color.white);
+                    lbSecondPassword.setOpaque(true);
+                    lbSecondPassword.setAlignmentX(200.0F);
+                    lbSecondPassword.setForeground(Color.gray);
+                    infoBuildPanel.add(lbSecondPassword);
+                    lbSecondPassword.setBounds(35, 155, 175, 20);
 
-                    //---- lbUser2 ----
-                    lbUser2.setText("\u5bc6\u7801");
-                    lbUser2.setPreferredSize(new Dimension(40, 20));
-                    lbUser2.setHorizontalAlignment(SwingConstants.CENTER);
-                    lbUser2.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 14));
-                    lbUser2.setBackground(Color.white);
-                    lbUser2.setOpaque(true);
-                    lbUser2.setAlignmentX(200.0F);
-                    lbUser2.setForeground(Color.gray);
-                    infoBuildPanel.add(lbUser2);
-                    lbUser2.setBounds(0, 90, 110, 20);
+                    //---- lbSex ----
+                    lbSex.setText("\u6027\u522b");
+                    lbSex.setPreferredSize(new Dimension(40, 20));
+                    lbSex.setHorizontalAlignment(SwingConstants.LEFT);
+                    lbSex.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 14));
+                    lbSex.setBackground(Color.white);
+                    lbSex.setOpaque(true);
+                    lbSex.setAlignmentX(200.0F);
+                    lbSex.setForeground(Color.gray);
+                    infoBuildPanel.add(lbSex);
+                    lbSex.setBounds(35, 325, 95, 20);
 
-                    //---- lbLine2 ----
-                    lbLine2.setText("__________________________________________");
-                    lbLine2.setForeground(Color.gray);
-                    infoBuildPanel.add(lbLine2);
-                    lbLine2.setBounds(40, 130, 320, 20);
+                    //---- cbFemale ----
+                    cbFemale.setText("\u5973");
+                    cbFemale.setOpaque(false);
+                    cbFemale.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 15));
+                    cbFemale.setFocusPainted(false);
+                    cbFemale.setFocusable(false);
+                    cbFemale.setContentAreaFilled(false);
+                    infoBuildPanel.add(cbFemale);
+                    cbFemale.setBounds(235, 320, 64, 31);
 
-                    //---- inputUserName2 ----
-                    inputUserName2.setBorder(null);
-                    inputUserName2.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
-                    infoBuildPanel.add(inputUserName2);
-                    inputUserName2.setBounds(40, 115, 295, 25);
+                    //---- cbMale ----
+                    cbMale.setText("\u7537");
+                    cbMale.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 15));
+                    cbMale.setContentAreaFilled(false);
+                    cbMale.setFocusable(false);
+                    cbMale.setFocusPainted(false);
+                    cbMale.setOpaque(false);
+                    infoBuildPanel.add(cbMale);
+                    cbMale.setBounds(135, 320, 64, 31);
 
-                    //---- lbUser3 ----
-                    lbUser3.setText("\u786e\u8ba4\u5bc6\u7801");
-                    lbUser3.setPreferredSize(new Dimension(40, 20));
-                    lbUser3.setHorizontalAlignment(SwingConstants.CENTER);
-                    lbUser3.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 14));
-                    lbUser3.setBackground(Color.white);
-                    lbUser3.setOpaque(true);
-                    lbUser3.setAlignmentX(200.0F);
-                    lbUser3.setForeground(Color.gray);
-                    infoBuildPanel.add(lbUser3);
-                    lbUser3.setBounds(15, 165, 110, 20);
+                    //---- lbCity ----
+                    lbCity.setText("\u57ce\u5e02");
+                    lbCity.setPreferredSize(new Dimension(40, 20));
+                    lbCity.setHorizontalAlignment(SwingConstants.LEFT);
+                    lbCity.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 14));
+                    lbCity.setBackground(Color.white);
+                    lbCity.setOpaque(true);
+                    lbCity.setAlignmentX(200.0F);
+                    lbCity.setForeground(Color.gray);
+                    infoBuildPanel.add(lbCity);
+                    lbCity.setBounds(35, 225, 165, 20);
 
-                    //---- lbLine3 ----
-                    lbLine3.setText("__________________________________________");
-                    lbLine3.setForeground(Color.gray);
-                    infoBuildPanel.add(lbLine3);
-                    lbLine3.setBounds(40, 205, 320, 20);
+                    //---- btnRegister ----
+                    btnRegister.setIcon(new ImageIcon("E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\registerBtn_first_normal.png"));
+                    btnRegister.setContentAreaFilled(false);
+                    btnRegister.setBorderPainted(false);
+                    btnRegister.setFocusPainted(false);
+                    btnRegister.setPressedIcon(new ImageIcon("E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\registerBtn_selected.png"));
+                    btnRegister.setRolloverIcon(new ImageIcon("E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\registerBtn_normal.png"));
+                    infoBuildPanel.add(btnRegister);
+                    btnRegister.setBounds(100, 375, 195, 50);
 
-                    //---- inputUserName3 ----
-                    inputUserName3.setBorder(null);
-                    inputUserName3.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
-                    infoBuildPanel.add(inputUserName3);
-                    inputUserName3.setBounds(40, 190, 295, 25);
+                    //---- edtFirstPassword ----
+                    edtFirstPassword.setWidth(300);
+                    edtFirstPassword.setHeight(30);
+                    edtFirstPassword.setBorder(null);
+                    infoBuildPanel.add(edtFirstPassword);
+                    edtFirstPassword.setBounds(40, 110, 300, 30);
 
-                    //---- lbUser4 ----
-                    lbUser4.setText("\u6027\u522b");
-                    lbUser4.setPreferredSize(new Dimension(40, 20));
-                    lbUser4.setHorizontalAlignment(SwingConstants.CENTER);
-                    lbUser4.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 14));
-                    lbUser4.setBackground(Color.white);
-                    lbUser4.setOpaque(true);
-                    lbUser4.setAlignmentX(200.0F);
-                    lbUser4.setForeground(Color.gray);
-                    infoBuildPanel.add(lbUser4);
-                    lbUser4.setBounds(0, 325, 110, 20);
+                    //---- edtUserName ----
+                    edtUserName.setHeight(30);
+                    edtUserName.setWidth(300);
+                    edtUserName.setBorder(null);
+                    edtUserName.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.BOLD, 16));
+                    infoBuildPanel.add(edtUserName);
+                    edtUserName.setBounds(40, 35, 300, 30);
 
-                    //---- checkBox2 ----
-                    checkBox2.setText("\u5973");
-                    checkBox2.setOpaque(false);
-                    checkBox2.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 15));
-                    checkBox2.setFocusPainted(false);
-                    checkBox2.setFocusable(false);
-                    checkBox2.setContentAreaFilled(false);
-                    infoBuildPanel.add(checkBox2);
-                    checkBox2.setBounds(235, 320, 64, 31);
+                    //---- edtSecondPassword ----
+                    edtSecondPassword.setBorder(null);
+                    edtSecondPassword.setWidth(300);
+                    edtSecondPassword.setHeight(30);
+                    infoBuildPanel.add(edtSecondPassword);
+                    edtSecondPassword.setBounds(40, 185, 300, 30);
 
-                    //---- checkBox3 ----
-                    checkBox3.setText("\u7537");
-                    checkBox3.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 15));
-                    checkBox3.setContentAreaFilled(false);
-                    checkBox3.setFocusable(false);
-                    checkBox3.setFocusPainted(false);
-                    checkBox3.setOpaque(false);
-                    infoBuildPanel.add(checkBox3);
-                    checkBox3.setBounds(135, 320, 64, 31);
+                    //---- edtCity ----
+                    edtCity.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.BOLD, 16));
+                    edtCity.setBorder(null);
+                    edtCity.setWidth(300);
+                    edtCity.setHeight(30);
+                    infoBuildPanel.add(edtCity);
+                    edtCity.setBounds(40, 260, 300, 30);
 
-                    //---- lbUser5 ----
-                    lbUser5.setText("\u57ce\u5e02");
-                    lbUser5.setPreferredSize(new Dimension(40, 20));
-                    lbUser5.setHorizontalAlignment(SwingConstants.CENTER);
-                    lbUser5.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 14));
-                    lbUser5.setBackground(Color.white);
-                    lbUser5.setOpaque(true);
-                    lbUser5.setAlignmentX(200.0F);
-                    lbUser5.setForeground(Color.gray);
-                    infoBuildPanel.add(lbUser5);
-                    lbUser5.setBounds(0, 235, 110, 20);
-
-                    //---- inputUserName4 ----
-                    inputUserName4.setBorder(null);
-                    inputUserName4.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.PLAIN, 16));
-                    infoBuildPanel.add(inputUserName4);
-                    inputUserName4.setBounds(40, 260, 295, 25);
-
-                    //---- lbLine4 ----
-                    lbLine4.setText("__________________________________________");
-                    lbLine4.setForeground(Color.gray);
-                    infoBuildPanel.add(lbLine4);
-                    lbLine4.setBounds(40, 275, 320, 20);
-
-                    //---- button1 ----
-                    button1.setIcon(new ImageIcon("E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\registerBtn_first_normal.png"));
-                    button1.setContentAreaFilled(false);
-                    button1.setBorderPainted(false);
-                    button1.setFocusPainted(false);
-                    button1.setPressedIcon(new ImageIcon("E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\registerBtn_selected.png"));
-                    button1.setRolloverIcon(new ImageIcon("E:\\JetBrains\\IDEA projects\\ChatClient\\resources\\registerBtn_normal.png"));
-                    infoBuildPanel.add(button1);
-                    button1.setBounds(95, 395, 195, 50);
+                    //---- lbStatus ----
+                    lbStatus.setFont(new Font("\u5fae\u8f6f\u96c5\u9ed1", Font.BOLD, 15));
+                    lbStatus.setForeground(Color.red);
+                    infoBuildPanel.add(lbStatus);
+                    lbStatus.setBounds(75, 445, 235, 25);
 
                     { // compute preferred size
                         Dimension preferredSize = new Dimension();
@@ -341,21 +462,18 @@ public class RegisterLayout extends JDialog {
     private JPanel infoPanel;
     private JPanel infoBuildPanel;
     private JLabel lbUser;
-    private JLabel lbLine1;
-    private JTextField inputUserName;
-    private JLabel lbUser2;
-    private JLabel lbLine2;
-    private JTextField inputUserName2;
-    private JLabel lbUser3;
-    private JLabel lbLine3;
-    private JTextField inputUserName3;
-    private JLabel lbUser4;
-    private JCheckBox checkBox2;
-    private JCheckBox checkBox3;
-    private JLabel lbUser5;
-    private JTextField inputUserName4;
-    private JLabel lbLine4;
-    private JButton button1;
+    private JLabel lbFirstPassword;
+    private JLabel lbSecondPassword;
+    private JLabel lbSex;
+    private JCheckBox cbFemale;
+    private JCheckBox cbMale;
+    private JLabel lbCity;
+    private JButton btnRegister;
+    private LinearPasswordBox edtFirstPassword;
+    private LinearInputBox edtUserName;
+    private LinearPasswordBox edtSecondPassword;
+    private LinearInputBox edtCity;
+    private JLabel lbStatus;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     public static void main(String[] args){
