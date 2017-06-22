@@ -1,5 +1,7 @@
 package ui.custom;
 
+import util.Util;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -9,7 +11,7 @@ import java.awt.*;
 public class ChatItem extends JPanel {
     private CirclePictureLabel circlePictureLabel;
     private JTextArea textArea;
-    private String imgUrl;
+    private String imgUrl = "resources/registerBtn_normal.png";
     private String content;
     private Color areaColor = Color.LIGHT_GRAY;
     private Color textColor = Color.DARK_GRAY;
@@ -19,8 +21,8 @@ public class ChatItem extends JPanel {
     private int areaWidth;
     private int areaHeight;
 
-    private int imgWidth;
-    private int imgHeight;
+    private int imgWidth = 50;
+    private int imgHeight = 50;
 
     private int margin = 15;
 
@@ -47,11 +49,17 @@ public class ChatItem extends JPanel {
     }
 
     private void reCalHeight(){
-        System.out.println(textArea.getText().length());
-        lineCount = textArea.getText().length()/15;
-        System.out.println(lineCount);
+        String content = textArea.getText();
+        System.out.println(content.length());
+        int count = Util.countblank(content);
+        lineCount = content.length()/15+count;
+        System.out.println("lineCount"+lineCount);
         this.areaHeight = lineCount*27;
-        this.areaWidth = textArea.getText().length()*20;
+        if (content.length()<=2){
+            this.areaWidth = content.length()*50;
+        }else {
+            this.areaWidth = content.length()*26;
+        }
         System.out.println(areaHeight);
         System.out.println(areaWidth);
     }
@@ -62,7 +70,7 @@ public class ChatItem extends JPanel {
         textArea = new JTextArea();
         textArea.setFont(font);
         textArea.setLineWrap(true);
-        textArea.setMargin(new Insets(5,20,5,20));
+        textArea.setMargin(new Insets(5,10,5,20));
 
         this.setPreferredSize(new Dimension(maxWidth,50));
         this.setMaximumSize(new Dimension(maxWidth,50));
@@ -85,8 +93,8 @@ public class ChatItem extends JPanel {
         textArea.setForeground(textColor);
 
         reCalHeight();
-        System.out.println(lineCount>1?maxAreaWidth:areaWidth);
-        System.out.println(lineCount>1?areaHeight:30);
+        System.out.println("area width:"+(lineCount>1?maxAreaWidth:areaWidth));
+        System.out.println("area height:"+(lineCount>1?areaHeight:60));
 
         if (rightToLeft){
             circlePictureLabel.setBounds(790-imgWidth-10,10,imgWidth,imgHeight);
