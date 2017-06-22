@@ -11,15 +11,39 @@ import java.util.Properties;
  */
 public class Config {
     public static final String SEPARATOR = "&_&";
+    public static final String CHAR_SET = "utf-8";
 
     public static final String CLOSE_SOCKET = "close_socket";
     public static final String NET_LOGIN = "net_login";
+    public static final String NET_REGISTER = "net_register";
     public static final String LOGIN = "login";
+    public static final String REGISTER = "register";
+    public static final String USER_CHANGE = "user_change";
+
+
+    //string status
+    public static final String USER_IN = "300";
+    public static final String USER_OUT = "301";
+
+    //action
+    public static final String GET_LIST = "get_list";
+    public static final String GET_MESSAGE = "get_message";
+    public static final String NET_SEND = "net_send";
+
+    //success
+    public static final int SUCCESS_GET_LIST = 3;
+    public static final int SUCCESS_LOGIN = 2;
+    public static final int SUCCESS_REGISTER = 1;
+
+    public static final int USER_STATUS_ONLINE = 200;
+    public static final int USER_STATUS_NEW_REGISTER = 201;
+    public static final int USER_STATUS_OFFLINE = 202;
 
     //errorcode
     public static final int ERROR_TIME_OUT = 99;
     public static final int ERROR_PASSWORD_INCORRECT = 100;
     public static final int ERROR_NO_SUCH_USER = 101;
+    public static final int ERROR_INVALID_USER_NAME = 102;
 
     //error string
     public static final String STRING_NO_SUCH_USER = "无此用户";
